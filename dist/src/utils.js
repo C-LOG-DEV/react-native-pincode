@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const async_storage_1 = require("@react-native-community/async-storage");
 const Keychain = require("react-native-keychain");
+const react_native_1 = require("react-native");
 var PinResultStatus;
 (function (PinResultStatus) {
     PinResultStatus["initial"] = "initial";
@@ -18,5 +18,5 @@ exports.deletePinCode = async (serviceName) => {
     return await Keychain.resetInternetCredentials(serviceName);
 };
 exports.resetInternalStates = async (asyncStorageKeys) => {
-    return await async_storage_1.default.multiRemove(asyncStorageKeys);
+    return await react_native_1.AsyncStorage.multiRemove(asyncStorageKeys);
 };

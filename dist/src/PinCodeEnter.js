@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const delay_1 = require("./delay");
 const PinCode_1 = require("./PinCode");
 const utils_1 = require("./utils");
-const async_storage_1 = require("@react-native-community/async-storage");
 const React = require("react");
 const react_native_1 = require("react-native");
 const Keychain = require("react-native-keychain");
@@ -22,12 +21,12 @@ class PinCodeEnter extends React.PureComponent {
                 }
                 this.setState({ pinCodeStatus: utils_1.PinResultStatus.initial });
                 this.props.changeInternalStatus(utils_1.PinResultStatus.initial);
-                const pinAttemptsStr = await async_storage_1.default.getItem(this.props.pinAttemptsAsyncStorageName);
+                const pinAttemptsStr = await react_native_1.AsyncStorage.getItem(this.props.pinAttemptsAsyncStorageName);
                 let pinAttempts = pinAttemptsStr ? +pinAttemptsStr : 0;
                 const pin = this.props.storedPin || this.keyChainResult;
                 if (pin === pinCode) {
                     this.setState({ pinCodeStatus: utils_1.PinResultStatus.success });
-                    async_storage_1.default.multiRemove([
+                    react_native_1.AsyncStorage.multiRemove([
                         this.props.pinAttemptsAsyncStorageName,
                         this.props.timePinLockedAsyncStorageName
                     ]);
@@ -39,12 +38,12 @@ class PinCodeEnter extends React.PureComponent {
                     pinAttempts++;
                     if (+pinAttempts >= this.props.maxAttempts &&
                         !this.props.disableLockScreen) {
-                        await async_storage_1.default.setItem(this.props.timePinLockedAsyncStorageName, new Date().toISOString());
+                        await react_native_1.AsyncStorage.setItem(this.props.timePinLockedAsyncStorageName, new Date().toISOString());
                         this.setState({ locked: true, pinCodeStatus: utils_1.PinResultStatus.locked });
                         this.props.changeInternalStatus(utils_1.PinResultStatus.locked);
                     }
                     else {
-                        await async_storage_1.default.setItem(this.props.pinAttemptsAsyncStorageName, pinAttempts.toString());
+                        await react_native_1.AsyncStorage.setItem(this.props.pinAttemptsAsyncStorageName, pinAttempts.toString());
                         this.setState({ pinCodeStatus: utils_1.PinResultStatus.failure });
                         this.props.changeInternalStatus(utils_1.PinResultStatus.failure);
                     }

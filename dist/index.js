@@ -6,7 +6,6 @@ const PinCode_1 = require("./src/PinCode");
 const PinCodeChoose_1 = require("./src/PinCodeChoose");
 const PinCodeEnter_1 = require("./src/PinCodeEnter");
 const utils_1 = require("./src/utils");
-const async_storage_1 = require("@react-native-community/async-storage");
 const React = require("react");
 const react_native_1 = require("react-native");
 const disableLockScreenDefault = false;
@@ -33,7 +32,7 @@ class PINCode extends React.PureComponent {
         this.renderLockedPage = this.renderLockedPage.bind(this);
     }
     async componentWillMount() {
-        await async_storage_1.default.getItem(this.props.timePinLockedAsyncStorageName || timePinLockedAsyncStorageNameDefault).then((val) => {
+        await react_native_1.AsyncStorage.getItem(this.props.timePinLockedAsyncStorageName || timePinLockedAsyncStorageNameDefault).then((val) => {
             this.setState({ pinLocked: !!val });
         });
     }
