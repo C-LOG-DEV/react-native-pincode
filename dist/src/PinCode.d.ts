@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import * as React from 'react';
 import { StyleProp, TextStyle, ViewStyle } from 'react-native';
 /**
@@ -76,7 +75,7 @@ export declare type IState = {
 export declare enum PinStatus {
     choose = "choose",
     confirm = "confirm",
-    enter = "enter",
+    enter = "enter"
 }
 declare class PinCode extends React.PureComponent<IProps, IState> {
     private readonly _circleSizeEmpty;

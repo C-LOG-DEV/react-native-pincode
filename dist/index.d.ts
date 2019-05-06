@@ -1,5 +1,4 @@
 /// <reference path="../src/types.d.ts" />
-/// <reference types="react" />
 import { PinResultStatus } from "./src/utils";
 import * as React from "react";
 import { StyleProp, ViewStyle, TextStyle } from "react-native";
