@@ -440,7 +440,7 @@ class PinCode extends React.PureComponent {
                                 ],
                                 timing: { duration: 400, ease: d3_ease_1.easeLinear }
                             } }, ({ opacity }) => this.props.buttonDeleteComponent && this.state.password.length === 0
-                            ? this.props.buttonDeleteComponent()
+                            ? this.props.buttonDeleteComponent(opacity)
                             : this.renderButtonDelete(opacity)))))));
     }
 }
