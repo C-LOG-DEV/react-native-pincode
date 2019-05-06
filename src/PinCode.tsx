@@ -757,15 +757,8 @@ class PinCode extends React.PureComponent<IProps, IState> {
                   timing: { duration: 400, ease: easeLinear }
                 }}>
                 {({ opacity }: any) =>
-                  this.props.buttonDeleteComponent
-                    ? this.props.buttonDeleteComponent(() => {
-                        if (this.state.password.length > 0) {
-                          const newPass = this.state.password.slice(0, -1)
-                          this.setState({ password: newPass })
-                          if (this.props.getCurrentLength)
-                            this.props.getCurrentLength(newPass.length)
-                        }
-                      })
+                  this.props.buttonDeleteComponent && this.state.password.length === 0
+                    ? this.props.buttonDeleteComponent()
                     : this.renderButtonDelete(opacity)
                 }
               </Animate>
